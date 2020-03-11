@@ -1,10 +1,18 @@
 <?php
-namespace PowerSiteBuilder\Widgets;
+
+namespace PowerSiteBuilder;
+use PowerSiteBuilder\Helpers\Utils as Utils;
+
+
+use \Elementor\Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Typography;
+
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly.
 	}
 	
-	class Power_Site_Builder_Breadcrumb extends \Elementor\Widget_Base {
+	class PowerSiteBuilder_Breadcrumb extends Widget_Base {
 		
 		public function get_name() {
 			return 'power_site_builder_breadcrumb';
@@ -33,7 +41,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_home_text',
 				[
 					'label'       => __( 'Home Text', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default' => __( 'Home', 'power-site-builder' ),
 					'placeholder' => __( 'Blog for ', 'power-site-builder' ),
 				]
@@ -42,7 +50,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_archive_prefix',
 				[
 					'label'       => __( 'Archive Prefix', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default' => __( 'Blog for ', 'power-site-builder' ),
 					'placeholder' => __( 'Blog for ', 'power-site-builder' ),
 				]
@@ -51,7 +59,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_seperator',
 				[
 					'label'       => __( 'Seperator', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default' =>'/',
 					'placeholder' => __( 'Seperator ', 'power-site-builder' ),
 				]
@@ -62,11 +70,11 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_section_style',
 				[
 					'label' => esc_html__( 'Breadcrumb', 'power-site-builder' ),
-					'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+					'tab'   => Controls_Manager::TAB_STYLE,
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'psb_breadcrumb_link_typography',
 					'label'    => esc_html__( 'Link Typography', 'power-site-builder' ),
@@ -77,7 +85,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_text_color',
 				[
 					'label'     => esc_html__( 'Link Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-breadcrumb li a' => 'color: {{VALUE}};',
@@ -85,7 +93,7 @@ namespace PowerSiteBuilder\Widgets;
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'psb_breadcrumb_active_typography',
 					'label'    => esc_html__( 'Active Typography', 'power-site-builder' ),
@@ -96,7 +104,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_active_color',
 				[
 					'label'     => esc_html__( 'Active Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-breadcrumb li' => 'color: {{VALUE}};',
@@ -105,7 +113,7 @@ namespace PowerSiteBuilder\Widgets;
 			);
 
 			$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'psb_breadcrumb_seperator_typography',
 					'label'    => esc_html__( 'Seperator Typography', 'power-site-builder' ),
@@ -116,7 +124,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_breadcrumb_seperator_color',
 				[
 					'label'     => esc_html__( 'Seperator Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-breadcrumb .power-sep' => 'color: {{VALUE}};',
@@ -129,7 +137,7 @@ namespace PowerSiteBuilder\Widgets;
 		protected function render( ){
 			$settings = $this->get_settings_for_display();
 			extract($settings);
-			$seperator = \Power_Site_Builder\Libs\Helpers::kses('<span class="power-sep">'.$psb_breadcrumb_seperator.'</span>');
+			$seperator = Utils::kses('<span class="power-sep">'.$psb_breadcrumb_seperator.'</span>');
 			echo '<ul class="power-breadcrumb">';
 			if ( !is_home() ) { 
 				echo '<li><a href="';

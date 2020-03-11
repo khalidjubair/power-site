@@ -1,10 +1,16 @@
 <?php
-namespace PowerSiteBuilder\Widgets;
+
+namespace PowerSiteBuilder;
+use PowerSiteBuilder\Helpers\Utils as Utils;
+
+use \Elementor\Widget_Base;
+use \Elementor\Controls_Manager;
+
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly.
 	}
 	
-	class Power_Site_Builder_Post_Content extends \Elementor\Widget_Base {
+	class PowerSiteBuilder_Post_Content extends Widget_Base {
 		
 		public function get_name() {
 			return 'power_site_builder_post_content';
@@ -36,7 +42,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_content_id',
 				[
 					'label'       => __( 'Other Post ID', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'placeholder' => __( 'Type your post id here', 'power-site-builder' ),
 				]
 			);
@@ -48,7 +54,7 @@ namespace PowerSiteBuilder\Widgets;
 		protected function render() {
 			$settings = $this->get_settings_for_display();
 			extract($settings);
-			echo \Power_Site_Builder\Libs\Helpers::get_builder_content($psb_post_content_id);
+			echo Utils::get_builder_content($psb_post_content_id);
 			
 			
 		}

@@ -1,10 +1,17 @@
 <?php
-namespace PowerSiteBuilder\Widgets;
+
+namespace PowerSiteBuilder;
+use PowerSiteBuilder\Helpers\Utils as Utils;
+
+use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Controls_Manager;
+
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly.
 	}
 	
-	class Power_Site_Builder_Post_Featured_Image extends \Elementor\Widget_Base {
+	class PowerSiteBuilder_Post_Featured_Image extends Widget_Base {
 		
 		public function get_name() {
 			return 'power_site_builder_post_featured_image';
@@ -36,7 +43,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_featured_image_fallback',
 				[
 					'label'     => __( 'Fallback Image', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::MEDIA,
+					'type'      => Controls_Manager::MEDIA,
 					'dynamic'   => [
 						'active' => true,
 					],
@@ -49,7 +56,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_featured_image',
 				[
 					'label' => __( 'Image', 'power-site-builder' ),
-					'type' => \Elementor\Controls_Manager::HIDDEN,
+					'type' => Controls_Manager::HIDDEN,
 					'default' => [
 						'url' => get_the_post_thumbnail_url(get_the_ID()),
 						'id' => get_post_thumbnail_id(get_the_ID()),
@@ -57,7 +64,7 @@ namespace PowerSiteBuilder\Widgets;
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Image_Size::get_type(),
+				Group_Control_Image_Size::get_type(),
 				[
 					'name' => 'psb_post_featured_image_size',
 					'default' => 'full',
@@ -68,7 +75,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_featured_image_align',
 				[
 					'label'        => __( 'Alignment', 'power-site-builder' ),
-					'type'         => \Elementor\Controls_Manager::CHOOSE,
+					'type'         => Controls_Manager::CHOOSE,
 					'options'      => [
 						'left'    => [
 							'title' => __( 'Left', 'power-site-builder' ),
@@ -96,11 +103,11 @@ namespace PowerSiteBuilder\Widgets;
 			$settings = $this->get_settings_for_display();
 			extract($settings);
 			$image_html = $psb_post_featured_image['url'] != '' ?
-				\Elementor\Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_featured_image_size', 'psb_post_featured_image' ) : 
-				\Elementor\Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_featured_image_size', 'psb_post_featured_image_fallback' );;
+				Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_featured_image_size', 'psb_post_featured_image' ) : 
+				Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_featured_image_size', 'psb_post_featured_image_fallback' );;
 
 			echo '<div class="power-post-featured-image">
-				'.\Power_Site_Builder\Libs\Helpers::kses($image_html).'
+				'.Utils::kses($image_html).'
 			</div>';
 		
 		}

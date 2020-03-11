@@ -1,10 +1,18 @@
 <?php
-namespace PowerSiteBuilder\Widgets;
+
+namespace PowerSiteBuilder;
+use PowerSiteBuilder\Helpers\Utils as Utils;
+
+use \Elementor\Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Group_Control_Text_Shadow;
+
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly.
 	}
 	
-	class Power_Site_Builder_Post_Excerpt extends \Elementor\Widget_Base {
+	class PowerSiteBuilder_Post_Excerpt extends Widget_Base {
 		
 		public function get_name() {
 			return 'power_site_builder_post_excerpt';
@@ -36,7 +44,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_excerpt_use_custom_excerpt',
 				[
 					'label'        => __( 'Use Custom Excerpt?', 'power-site-builder' ),
-					'type'         => \Elementor\Controls_Manager::SWITCHER,
+					'type'         => Controls_Manager::SWITCHER,
 					'label_on'     => __( 'Icon', 'power-site-builder' ),
 					'label_off'    => __( 'Image', 'power-site-builder' ),
 					'return_value' => 'yes',
@@ -47,7 +55,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_excerpt_custom_excerpt',
 				[
 					'label'       => __( 'Custom Excerpt', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default'     => __( 'Post Excerpt', 'power-site-builder' ),
 					'placeholder' => __( 'Type your excerpt here', 'power-site-builder' ),
 					'condition' => [
@@ -59,7 +67,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_excerpt_word_limit',
 				[
 					'label'       => __( 'Limit Word', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default'     => '20',
 					'placeholder' => __( 'Type your excerpt word limit', 'power-site-builder' ),
 				]
@@ -70,11 +78,11 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_heading_section_style',
 				[
 					'label' => esc_html__( 'Excerpt', 'power-site-builder' ),
-					'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+					'tab'   => Controls_Manager::TAB_STYLE,
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'psb_post_excerpt_typography',
 					'label'    => esc_html__( 'Typography', 'power-site-builder' ),
@@ -85,7 +93,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_excerpt_text_color',
 				[
 					'label'     => esc_html__( 'Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-post-excerpt' => 'color: {{VALUE}};',
@@ -96,7 +104,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_excerpt_margin',
 				[
 					'label'      => esc_html__( 'Margin', 'power-site-builder' ),
-					'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%', 'em' ],
 					'selectors'  => [
 						'{{WRAPPER}} .power-post-excerpt' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -107,7 +115,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_excerpt_padding',
 				[
 					'label'      => esc_html__( 'Padding', 'power-site-builder' ),
-					'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%', 'em' ],
 					'selectors'  => [
 						'{{WRAPPER}} .power-post-excerpt' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -115,7 +123,7 @@ namespace PowerSiteBuilder\Widgets;
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Text_Shadow::get_type(),
+				Group_Control_Text_Shadow::get_type(),
 				[
 					'name'     => 'psb_post_excerpt_text_shadow',
 					'label'    => esc_html__( 'Text Shadow', 'power-site-builder' ),
@@ -132,7 +140,7 @@ namespace PowerSiteBuilder\Widgets;
 			$post_excerpt = $psb_post_excerpt_use_custom_excerpt == 'yes' ? $psb_post_excerpt_custom_excerpt: get_the_excerpt();
 			$trimmed_content = wp_trim_words( $post_excerpt, $psb_post_excerpt_word_limit, null );
 			echo '<div class="power-post-excerpt">
-				'.\Power_Site_Builder\Libs\Helpers::kses($trimmed_content).'
+				'.Utils::kses($trimmed_content).'
 			</div>';
 		
 		}

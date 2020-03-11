@@ -1,13 +1,13 @@
 <?php 
- 
-namespace PowerSiteBuilder\Admin;
+namespace PowerSiteBuilder\Admin\Menu;
 use \PowerSiteBuilder\Helpers\Utils as Utils;
+use \PowerSiteBuilder\Admin\WidgetsMap\Init as Widgets;
 
 defined( 'ABSPATH' ) || exit;
 
 class Ajax{
     public function __construct() {
-        add_action( 'wp_ajax_psb_admin_action', [$this, 'admin'] );
+        add_action( 'wp_ajax_power_admin_action', [$this, 'admin'] );
         add_action( 'init', [$this, 'admin_init'] );
     }
     public function admin() {
@@ -19,7 +19,7 @@ class Ajax{
     }
 
     public function admin_init() {
-        $default_widgets = Widgets::default_widgets();
+        $default_widgets = Widgets::default_widgets(); 
         $data = get_option('power_site_builder_options');
         if(isset($data) && is_array($data['widget_list'])){
             return;

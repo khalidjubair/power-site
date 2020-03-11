@@ -18,13 +18,10 @@ jQuery(document).ready(function ($) {
         var formdata = form.serialize();
         form.addClass('is-loading');
         btn.attr("disabled", true);
-        console.log(ajaxurl);
-        $.post( ajaxurl + '?action=psb_admin_action',formdata, function(formdata ) {
+        $.post( ajaxurl + '?action=power_admin_action',formdata, function(formdata ) {
             form.removeClass('is-loading');
             btn.removeAttr("disabled");
-
         });
-        
         e.preventDefault();
     });
     

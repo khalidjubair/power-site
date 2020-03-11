@@ -1,10 +1,16 @@
 <?php
-namespace PowerSiteBuilder\Widgets;
+
+namespace PowerSiteBuilder;
+use PowerSiteBuilder\Helpers\Partials as Partials;
+
+use \Elementor\Widget_Base;
+use \Elementor\Controls_Manager;
+
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly.
 	}
 	
-	class Power_Site_Builder_Comments extends \Elementor\Widget_Base {
+	class PowerSiteBuilder_Comments extends Widget_Base {
 		
 		public function get_name() {
 			return 'power_site_builder_comments';
@@ -33,7 +39,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_comments_text',
 				[
 					'label'       => __( 'Text', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default' => __( 'Home', 'power-site-builder' ),
 					'placeholder' => __( 'Blog for ', 'power-site-builder' ),
 				]
@@ -46,7 +52,7 @@ namespace PowerSiteBuilder\Widgets;
 			$settings = $this->get_settings_for_display();
 			extract($settings);
 
-			Libs\Helpers::comments(); 
+			Partials::comments(); 
 			
 		}
 

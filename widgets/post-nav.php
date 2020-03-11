@@ -1,10 +1,20 @@
 <?php
-namespace PowerSiteBuilder\Widgets;
+
+namespace PowerSiteBuilder;
+use PowerSiteBuilder\Helpers\Utils as Utils;
+
+use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly.
 	}
 	
-	class Power_Site_Builder_Post_Nav extends \Elementor\Widget_Base {
+	class PowerSiteBuilder_Post_Nav extends Widget_Base {
 		
 		public function get_name() {
 			return 'power_site_builder_post_nav';
@@ -33,7 +43,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_prev_label',
 				[
 					'label'       => __( 'Prev Label', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default' => __( 'Previous Post', 'power-site-builder' ),
 					'placeholder' => __( 'Previous Post ', 'power-site-builder' ),
 				]
@@ -42,7 +52,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_next_label',
 				[
 					'label'       => __( 'Next Label', 'power-site-builder' ),
-					'type'        => \Elementor\Controls_Manager::TEXT,
+					'type'        => Controls_Manager::TEXT,
 					'default' => __( 'Next Post', 'power-site-builder' ),
 					'placeholder' => __( 'Next Post ', 'power-site-builder' ),
 				]
@@ -51,7 +61,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_thumb_show',
 				[
 					'label' => esc_html__( 'Show Thumbnail?', 'power-site-builder' ),
-					'type' => \Elementor\Controls_Manager::SWITCHER,
+					'type' => Controls_Manager::SWITCHER,
 					'label_on' => esc_html__( 'Yes', 'power-site-builder' ),
 					'label_off' => esc_html__( 'No', 'power-site-builder' ),
 					'return_value' => 'yes',
@@ -62,7 +72,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_fallback',
 				[
 					'label'     => __( 'Fallback Image', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::MEDIA,
+					'type'      => Controls_Manager::MEDIA,
 					'dynamic'   => [
 						'active' => true,
 					],
@@ -78,7 +88,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_prev_thumb',
 				[
 					'label' => __( 'Image', 'power-site-builder' ),
-					'type' => \Elementor\Controls_Manager::HIDDEN,
+					'type' => Controls_Manager::HIDDEN,
 					'default' => [
 						'url' => get_the_post_thumbnail_url(get_previous_post()->ID),
 						'id' => get_post_thumbnail_id(get_previous_post()->ID),
@@ -92,7 +102,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_next_thumb',
 				[
 					'label' => __( 'Image', 'power-site-builder' ),
-					'type' => \Elementor\Controls_Manager::HIDDEN,
+					'type' => Controls_Manager::HIDDEN,
 					'default' => [
 						'url' => get_the_post_thumbnail_url(get_next_post()->ID),
 						'id' => get_post_thumbnail_id(get_next_post()->ID),
@@ -103,7 +113,7 @@ namespace PowerSiteBuilder\Widgets;
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Image_Size::get_type(),
+				Group_Control_Image_Size::get_type(),
 				[
 					'name' => 'psb_post_nav_thumb_size',
 					'default' => 'full',
@@ -118,14 +128,14 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_section_wrapper_style',
 				[
 					'label' => __( 'Wrapper', 'power-site-builder' ),
-					'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+					'tab'   => Controls_Manager::TAB_STYLE,
 				]
 			);
 			$this->add_control(
 				'psb_post_nav_wrapper_bg_color',
 				[
 					'label'     => __( 'Background Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .power-post-nav' => 'background-color: {{VALUE}}',
 					],
@@ -133,7 +143,7 @@ namespace PowerSiteBuilder\Widgets;
 			);
 
 			$this->add_group_control(
-				\Elementor\Group_Control_Border::get_type(),
+				Group_Control_Border::get_type(),
 				[
 					'name'     => 'psb_post_nav_wrapper_border',
 					'label'    => __( 'Border', 'power-site-builder' ),
@@ -144,7 +154,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_wrapper_radius',
 				[
 					'label'      => __( 'Border Radius', 'power-site-builder' ),
-					'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%', 'em' ],
 					'selectors'  => [
 						'{{WRAPPER}} .power-post-nav' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -152,7 +162,7 @@ namespace PowerSiteBuilder\Widgets;
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Box_Shadow::get_type(),
+				Group_Control_Box_Shadow::get_type(),
 				[
 					'name' => 'psb_post_nav_wrapper_shadow',
 					'label' => __( 'Box Shadow', 'power-site-builder' ),
@@ -163,7 +173,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_wrapper_padding',
 				[
 					'label'      => __( 'Padding', 'power-site-builder' ),
-					'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%', 'em' ],
 					'selectors'  => [
 						'{{WRAPPER}} .power-post-nav' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -174,7 +184,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_wrapper_margin',
 				[
 					'label'      => __( 'Margin', 'power-site-builder' ),
-					'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%', 'em' ],
 					'selectors'  => [
 						'{{WRAPPER}} .power-post-nav' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -187,11 +197,11 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_label_section_style',
 				[
 					'label' => esc_html__( 'Post Nav Label', 'power-site-builder' ),
-					'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+					'tab'   => Controls_Manager::TAB_STYLE,
 				]
 			);
 			$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'psb_post_nav_label_typography',
 					'label'    => esc_html__( 'Typography', 'power-site-builder' ),
@@ -202,7 +212,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_label_color',
 				[
 					'label'     => esc_html__( 'Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-post-nav .power-post-block .power-link-to' => 'color: {{VALUE}};',
@@ -214,12 +224,12 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_title_section_style',
 				[
 					'label' => esc_html__( 'Post Title', 'power-site-builder' ),
-					'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+					'tab'   => Controls_Manager::TAB_STYLE,
 				]
 			);
 			
 			$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'psb_post_nav_title_typography',
 					'label'    => esc_html__( 'Typography', 'power-site-builder' ),
@@ -238,7 +248,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_title_color_normal',
 				[
 					'label'     => esc_html__( 'Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-post-nav .power-post-block h4 a' => 'color: {{VALUE}};',
@@ -256,7 +266,7 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_title_color_hover',
 				[
 					'label'     => esc_html__( 'Color', 'power-site-builder' ),
-					'type'      => \Elementor\Controls_Manager::COLOR,
+					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => [
 						'{{WRAPPER}} .power-post-nav .power-post-block h4 a:hover' => 'color: {{VALUE}};',
@@ -270,14 +280,14 @@ namespace PowerSiteBuilder\Widgets;
 				'psb_post_nav_thumb_section_style',
 				[
 					'label' => esc_html__( 'Post Thumb', 'power-site-builder' ),
-					'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+					'tab'   => Controls_Manager::TAB_STYLE,
 				]
 			);
 			$this->add_control(
 				'psb_post_nav_thumb_spacing',
 				[
 					'label'   => __( 'Spacing', 'power-site-builder' ),
-					'type'    => \Elementor\Controls_Manager::SLIDER,
+					'type'    => Controls_Manager::SLIDER,
 					'range' => [
 						'px' => [
 							'min' => 0,
@@ -308,12 +318,12 @@ namespace PowerSiteBuilder\Widgets;
 
 			$prev_image_html = $psb_post_nav_thumb_show == 'yes' ? 
 				$psb_post_nav_prev_thumb['url'] != '' ?
-					\Elementor\Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_prev_thumb' ) : 
-					\Elementor\Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_fallback' ) : '';
+					Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_prev_thumb' ) : 
+					Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_fallback' ) : '';
 			$next_image_html = $psb_post_nav_thumb_show == 'yes' ? 
 				$psb_post_nav_next_thumb['url'] != '' ?
-					\Elementor\Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_next_thumb' ) : 
-					\Elementor\Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_fallback' ) : '';
+					Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_next_thumb' ) : 
+					Group_Control_Image_Size::get_attachment_image_html( $settings, 'psb_post_nav_thumb_size', 'psb_post_nav_fallback' ) : '';
 
 			$next_post	 = get_next_post();
 			$pre_post	 = get_previous_post();
@@ -328,7 +338,7 @@ namespace PowerSiteBuilder\Widgets;
 								<div class="power-prev-post">
 									<div class="power-post-block">
 										<div class="power-post-thumb">
-											<a href="<?php echo get_the_permalink( $pre_post->ID ); ?>"><?php echo \Power_Site_Builder\Libs\Helpers::kses($prev_image_html); ?>
+											<a href="<?php echo get_the_permalink( $pre_post->ID ); ?>"><?php echo Utils::kses($prev_image_html); ?>
 										</div>
 										<div class="power-post-title">
 											<a class="power-link-to" href="<?php echo get_the_permalink( $pre_post->ID ); ?>"><?php echo esc_html( $psb_post_nav_prev_label ) ?></a>
@@ -344,7 +354,7 @@ namespace PowerSiteBuilder\Widgets;
 								<div class="power-next-post">
 									<div class="power-post-block">
 										<div class="power-post-thumb">
-											<a href="<?php echo get_the_permalink( $next_post->ID ); ?>"><?php echo \Power_Site_Builder\Libs\Helpers::kses($next_image_html); ?>
+											<a href="<?php echo get_the_permalink( $next_post->ID ); ?>"><?php echo Utils::kses($next_image_html); ?>
 										</div>
 										<div class="power-post-title">
 											<a class="power-link-to" href="<?php echo get_the_permalink( $next_post->ID ); ?>"><?php echo esc_html( $psb_post_nav_next_label) ?></a>

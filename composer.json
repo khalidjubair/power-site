@@ -1,6 +1,6 @@
 {
     "name": "khalidjubair/power-site-builder",
-    "description": "Site Builder for Elementor",
+    "description": "Power Site Builder Elementor Addons",
     "type": "wordpress-plugin",
     "license": "GPLv3",
     "authors": [
@@ -20,3 +20,4 @@
         ]
     }
 }
+ 

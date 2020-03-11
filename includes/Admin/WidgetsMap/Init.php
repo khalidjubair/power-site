@@ -1,9 +1,9 @@
 <?php
 
-namespace PowerSiteBuilder\Admin;
+namespace PowerSiteBuilder\Admin\WidgetsMap;
 use \PowerSiteBuilder\Helpers\Utils as Utils;
 
-class Widgets{
+class Init{
 
     function __construct(){
         add_action( 'elementor/widgets/widgets_registered', [$this, 'register_widget'], 10, 1 );
@@ -15,8 +15,8 @@ class Widgets{
         
         foreach($active_widgets as $widget){
             if(in_array($widget, $default_widgets)){
-                $class_name = 'Power_Site_Builder\Power_Site_Builder_' . Utils::mk_class($widget);
-                include POWER_SITE_BUILDER_WIDGETS . $widget . '.php';
+                $class_name = 'PowerSiteBuilder\PowerSiteBuilder_' . Utils::mk_class($widget);
+                include POWER_SITE_BUILDER_WIDGETS_DIR_PATH . '/' . $widget . '.php'; 
                 if(class_exists($class_name)){
                     $widgets_manager->register_widget_type(new $class_name());
                 }
@@ -73,7 +73,7 @@ class Widgets{
             ],
         ];
     }
-
+    
     public static function default_widgets(){
         $map = self::widgets_map();
         $dynamic_widgets = [];

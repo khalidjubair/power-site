@@ -1,6 +1,7 @@
 <?php
-namespace PowerSiteBuilder\Admin;
 
+namespace PowerSiteBuilder\Admin\Menu;
+use PowerSiteBuilder\Admin\WidgetsMap\Init as Widgets;
 /**
  * Dashboard widgets tab template
  */
@@ -21,7 +22,7 @@ $active_widgets = Widgets::active_widgets();
     if ( !in_array( $key, $active_widgets ) ) {
         $checked = '';
     } ?>
-
+ 
       <div class="power-dashboard-widget-item">
 
           <i class="<?php echo $value['icon']; ?>"></i>

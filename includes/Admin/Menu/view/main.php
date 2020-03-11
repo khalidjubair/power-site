@@ -1,13 +1,12 @@
 <?php
 
-namespace PowerSiteBuilder\Admin;
-
+namespace PowerSiteBuilder\Admin\Menu;
 /**
- * Dashboard widgets tab template
+ * Dashboard main template
  */
 
 defined( 'ABSPATH' ) || die();
-
+ 
 $tabs = Init::get_tabs(); 
 
 ?>

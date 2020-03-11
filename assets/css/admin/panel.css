@@ -1,0 +1,30 @@
+.elementor-panel #elementor-panel-category-power-site-builder-footer .elementor-element-wrapper,
+.elementor-panel #elementor-panel-category-power-site-builder-header .elementor-element-wrapper,
+.elementor-panel #elementor-panel-category-power-site-builder .elementor-element-wrapper{
+    min-height:100px;
+}
+
+.elementor-panel #elementor-panel-category-power-site-builder-footer .title,
+.elementor-panel #elementor-panel-category-power-site-builder-header .title,
+.elementor-panel #elementor-panel-category-power-site-builder .title{
+    padding:0 5px;
+}
+
+.elementor-panel #elementor-panel-category-power-site-builder-footer .elementor-element .icon,
+.elementor-panel #elementor-panel-category-power-site-builder-header .elementor-element .icon,
+.elementor-panel #elementor-panel-category-power-site-builder .elementor-element .icon{
+    position: relative;
+}
+.elementor-panel #elementor-panel-category-power-site-builder-footer .elementor-element .icon i:after,
+.elementor-panel #elementor-panel-category-power-site-builder-header .elementor-element .icon i:after,
+.elementor-panel #elementor-panel-category-power-site-builder .elementor-element .icon i:after {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    content: "power";
+    font-size: 8px;
+    font-weight: 400;
+    padding: 2px;
+    opacity: .5;
+    border: 1px solid #d5d5d5;
+}
