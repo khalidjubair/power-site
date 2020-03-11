@@ -96,7 +96,6 @@
 			    new PowerSiteBuilder\Admin\Init; 
 			}
 			new PowerSiteBuilder\Cptui\Init;
-			new PowerSiteBuilder\Controls\Init;
             new PowerSiteBuilder\Admin\WidgetsMap\Init;
             new PowerSiteBuilder\Frontend\Init;
         }

@@ -90,8 +90,8 @@ use \Elementor\Group_Control_Box_Shadow;
 					'label' => __( 'Image', 'power-site-builder' ),
 					'type' => Controls_Manager::HIDDEN,
 					'default' => [
-						'url' => get_the_post_thumbnail_url(get_previous_post()->ID),
-						'id' => get_post_thumbnail_id(get_previous_post()->ID),
+						'url' => '',
+						'id' => '',
 					],
 					'condition' => [
 						'psb_post_nav_thumb_show' => 'yes',
@@ -104,8 +104,8 @@ use \Elementor\Group_Control_Box_Shadow;
 					'label' => __( 'Image', 'power-site-builder' ),
 					'type' => Controls_Manager::HIDDEN,
 					'default' => [
-						'url' => get_the_post_thumbnail_url(get_next_post()->ID),
-						'id' => get_post_thumbnail_id(get_next_post()->ID),
+						'url' => '',
+						'id' => '',
 					],
 					'condition' => [
 						'psb_post_nav_thumb_show' => 'yes',

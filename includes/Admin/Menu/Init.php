@@ -60,7 +60,7 @@ class Init {
             __( 'Power Site Builder', 'power-site-builder' ),
             'manage_options',
             self::$page_slug,
-            [ __CLASS__, 'render_main' ],
+            [ __CLASS__, 'render_widgets' ],
             POWER_SITE_BUILDER_IMG_DIR_URL .'/fav.png',
             2
         );

@@ -7,9 +7,9 @@ defined( 'ABSPATH' ) || exit;
 
 class Ajax{
     public function __construct() {
-        add_action( 'wp_ajax_power_admin_action', [$this, 'admin'] );
+        add_action( 'wp_ajax_psb_admin_action', [$this, 'admin'] );
         add_action( 'init', [$this, 'admin_init'] );
-    }
+    } 
     public function admin() {
         if(!current_user_can('edit_theme_options')){
             wp_die(esc_html__('Access denied.', 'power-site-builder'));
