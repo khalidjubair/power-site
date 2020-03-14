@@ -15,7 +15,7 @@ class Cpt {
     }
 
     public function init( $type, $singular_label, $plural_label, $settings = array() ){
-        
+
         $default_settings = array(
             'labels' => array(
                 'name' => __($plural_label, $this->textdomain),

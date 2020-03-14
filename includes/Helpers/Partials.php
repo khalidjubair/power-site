@@ -8,14 +8,17 @@ class Partials{
     function __construct(){}
 
 		public static function comments(){
+			global $commenter, $user_identity;
+
+			$comments = get_comments();
 
 			if ( post_password_required() ) {
 				return;
 			}
 			
-			$comment_number = absint(get_comments_number());
-			?>
-				<?php if (have_comments()) : ?>
+			$comment_number = absint(get_comments_number());  ?>
+				<?php
+				if (have_comments()) : ?>
 				<div class="power-comment-sec">
 					<h2 class="power-comment_title">
 						<span><?php
@@ -24,6 +27,7 @@ class Partials{
 						}else{
 							printf( '%1$s ' . esc_html__( 'Comments ', 'power-elements' ), $comment_number );
 						}
+
 						?></span>
 					</h2>
 					<ul class="power-comment-area">
@@ -33,7 +37,7 @@ class Partials{
 							*/
 							wp_list_comments( [
 								'reply_text'        => '<i class="fa fa-mail-reply-all"></i>'.esc_html__(' Reply', 'power-elements').'',
-								'callback'          => [ __CLASS__, 'comment_style' ],
+								'callback'          => [ __CLASS__, 'comment_callback' ],
 								'style'			 => 'ul',
 								'short_ping'	 => false,
 								'type'              => 'all',
@@ -168,4 +172,62 @@ class Partials{
 				<?php
 			endif;
 		}
+
+		public static function comment_callback( $comment, $args, $depth ) {
+			$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
+			$class = 'elementor-comment';
+			if ( ! empty( $args['has_children'] ) ) {
+				$class .= ' parent';
+			}
+			?>
+			<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $class, $comment ); ?>>
+			<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<?php
+						if ( 0 < $args['avatar_size'] ) {
+							echo get_avatar( $comment, $args['avatar_size'] );
+						}
+						?>
+						<?php
+						/* translators: %s: Comment author link. */
+						printf( __( '%s <span class="says">says:</span>', 'elementor-pro' ),
+							sprintf( '<b class="fn">%s</b>', get_comment_author_link( $comment ) )
+						);
+						?>
+					</div><!-- .comment-author -->
+	
+					<div class="comment-metadata">
+						<a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
+							<time datetime="<?php comment_time( 'c' ); ?>">
+								<?php
+								/* translators: 1: Comment date, 2: Comment time. */
+								printf( __( '%1$s at %2$s', 'elementor-pro' ), get_comment_date( '', $comment ), get_comment_time() );
+								?>
+							</time>
+						</a>
+						<?php edit_comment_link( __( 'Edit', 'elementor-pro' ), '<span class="edit-link">', '</span>' ); ?>
+					</div><!-- .comment-metadata -->
+	
+					<?php if ( '0' == $comment->comment_approved ) : ?>
+						<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'elementor-pro' ); ?></p>
+					<?php endif; ?>
+				</footer><!-- .comment-meta -->
+	
+				<div class="comment-content">
+					<?php comment_text(); ?>
+				</div><!-- .comment-content -->
+	
+				<?php
+				comment_reply_link( array_merge( $args, [
+					'add_below' => 'div-comment',
+					'depth' => $depth,
+					'max_depth' => $args['max_depth'],
+					'before' => '<div class="reply">',
+					'after' => '</div>',
+				] ) );
+				?>
+			</article><!-- .comment-body -->
+			<?php
+		} 
 }
